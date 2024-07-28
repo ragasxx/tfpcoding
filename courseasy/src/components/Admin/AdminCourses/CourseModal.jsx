@@ -25,12 +25,12 @@ const CourseModal = ({
   courseTitle,
   lectures = [],
   addLectureHandler,
-  loading
+  loading,
 }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [video, setVideo] = useState('');
-  const [videoPrev, setVideoPrev] = useState('');
+  // const [video, setVideo] = useState('');
+  // const [videoPrev, setVideoPrev] = useState('');
 
   const fileUploadCss = {
     cursor: 'pointer',
@@ -46,28 +46,25 @@ const CourseModal = ({
     '&::file-selector-button': fileUploadCss,
   };
 
-  const changeVideoHandler = e => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+  // const changeVideoHandler = e => {
+  //   const file = e.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
 
-    reader.onloadend = () => {
-      setVideoPrev(reader.result);
-      setVideo(file);
-    };
+  //   reader.onloadend = () => {
+  //     setVideoPrev(reader.result);
+  //     setVideo(file);
+  //   };
+  // };
+
+  const onCloseVideoRemove = () => {
+    setDescription('');
+    setTitle('');
+    onClose();
   };
 
-
-  const onCloseVideoRemove=() =>{
-      setDescription("");
-      setTitle("");
-      setVideo("");
-      setVideoPrev("");
-      onClose();
-  }
-
   return (
-    <Modal isOpen={isOpen} size={'full'} scrollBehavior='outside'>
+    <Modal isOpen={isOpen} size={'full'} scrollBehavior="outside">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{courseTitle}</ModalHeader>
@@ -80,24 +77,21 @@ const CourseModal = ({
                 <Heading children={`#${id}`} size={'sm'} opacity={0.4} />
               </Box>
               <Heading children="Lectures" size={'lg'} />
-              {lectures.map((item,i)=>(
+              {lectures.map((item, i) => (
                 <VideoCard
-                key={i}
-                title= {item.title}
-                description={item.description}
-                num={i+1}
-                lectureId= {item._id}
-                courseId={id}
-                deleteLectureButtonHandler={deleteLectureButtonHandler}
-              />
+                  key={i}
+                  title={item.title}
+                  description={item.description}
+                  num={i + 1}
+                  lectureId={item._id}
+                  courseId={id}
+                  deleteLectureButtonHandler={deleteLectureButtonHandler}
+                />
               ))}
-              
             </Box>
             <Box>
               <form
-                onSubmit={e =>
-                  addLectureHandler(e, id, title, description, video)
-                }
+                onSubmit={e => addLectureHandler(e, id, title, description)}
               >
                 <VStack spacing={'4'}>
                   <Heading
@@ -117,16 +111,16 @@ const CourseModal = ({
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                   />
-                  <Input
+                  {/* <Input
                     accept="video/mp4"
                     required
                     type={'file'}
                     focusBorderColor="purple.500"
                     css={fileUploadStyle}
                     onChange={changeVideoHandler}
-                  />
+                  /> */}
 
-                  {videoPrev && (
+                  {/* {videoPrev && (
                     <Box width={'60'} objectFit={'contain'}>
                       <video
                         src={videoPrev}
@@ -134,7 +128,7 @@ const CourseModal = ({
                         controls
                       />
                     </Box>
-                  )}
+                  )} */}
 
                   <Button
                     isLoading={loading}

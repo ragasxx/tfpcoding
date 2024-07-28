@@ -1,6 +1,5 @@
 import express from "express";
 import {
-  addToPlaylist,
   changePassword,
   deleteUser,
   forgetPassword,
@@ -9,7 +8,6 @@ import {
   login,
   logout,
   register,
-  removeFromPlaylist,
   resetPassword,
   updateProfile,
   updateProfilePicture,
@@ -56,10 +54,10 @@ router.route("/resetpassword/:token").put(resetPassword);
 
 // addtoplaylist
 
-router.route("/addtoplaylist").post(isAuthenticated, addToPlaylist);
+// router.route("/addtoplaylist").post(isAuthenticated, addToPlaylist);
 
 // remove from playlist
-router.route("/removefromplaylist").delete(isAuthenticated, removeFromPlaylist);
+// router.route("/removefromplaylist").delete(isAuthenticated, removeFromPlaylist);
 
 // delete my profile
 

@@ -10,9 +10,9 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import{useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { contactUs } from '../../redux/actions/other';
-import {toast} from "react-hot-toast";
+import { toast } from 'react-hot-toast';
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -20,30 +20,32 @@ const Contact = () => {
   const [message, setMessage] = useState('');
 
   const dispatch = useDispatch();
-  const {loading,error,message:contactMessage} = useSelector(state=>state.other);
-   
-  const submitHandler = (e)=>{
-      e.preventDefault();
-      dispatch(contactUs(name,email,message));  
-  }
+  const {
+    loading,
+    error,
+    message: contactMessage,
+  } = useSelector(state => state.other);
+
+  const submitHandler = e => {
+    e.preventDefault();
+    dispatch(contactUs(name, email, message));
+  };
 
   useEffect(() => {
-    if(error){
+    if (error) {
       toast.error(error);
-      dispatch({type:"clearError"});
+      dispatch({ type: 'clearError' });
     }
-    if(contactMessage){
+    if (contactMessage) {
       toast.success(contactMessage);
-      dispatch({type:"clearMessage"});
+      dispatch({ type: 'clearMessage' });
     }
-  }, [dispatch,contactMessage,error])
-  
-  
+  }, [dispatch, contactMessage, error]);
 
   return (
     <Container h={'92vh'}>
       <VStack h={'full'} justifyContent="center" spacing={'16'}>
-        <Heading children="Contact Us" />
+        <Heading fontSize={['1.6rem', '3xl']} children="Contact Us" />
         <form onSubmit={submitHandler} style={{ width: '100%' }}>
           <Box marginY={'4'}>
             <FormLabel htmlFor="name" children="Name" />
@@ -54,7 +56,7 @@ const Contact = () => {
               onChange={e => setName(e.target.value)}
               placeholder="abc"
               type={'text'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.300"
               autoComplete="false"
             />
           </Box>
@@ -67,7 +69,7 @@ const Contact = () => {
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@gmail.com"
               type={'email'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.300"
               autoComplete="false"
             />
           </Box>
@@ -80,11 +82,11 @@ const Contact = () => {
               value={message}
               onChange={e => setMessage(e.target.value)}
               placeholder="Your Message"
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.300"
               autoComplete="false"
             />
           </Box>
-          <Button isLoading={loading} my={'4'} colorScheme="yellow" type="submit">
+          <Button isLoading={loading} my={'4'} colorScheme="blue" type="submit">
             Send Mail
           </Button>
           <Box my={'4'}>

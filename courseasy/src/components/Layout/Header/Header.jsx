@@ -6,6 +6,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   HStack,
+  useColorModeValue,
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
@@ -13,9 +14,9 @@ import React from 'react';
 import { ColorModeSwitcher } from '../../../ColorModeSwitcher';
 import { RiDashboardFill, RiLogoutBoxLine, RiMenu5Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import {useDispatch} from "react-redux";
+import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/actions/user';
-
+import tfpLogo from '../../../assets/images/tfpLogo.png';
 
 const LinkButton = ({ url = '/', title = 'Home', onClose }) => (
   <Link onClick={onClose} to={url}>
@@ -23,15 +24,17 @@ const LinkButton = ({ url = '/', title = 'Home', onClose }) => (
   </Link>
 );
 
-const Header = ({isAuthenticated,user}) => {
+const Header = ({ isAuthenticated, user }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-   
+
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-    dispatch(logout())
+    dispatch(logout());
     onClose();
   };
+
+  const drawerBg = useColorModeValue('gray.200', 'gray.900'); // Use custom dark color
 
   return (
     <>
@@ -40,7 +43,7 @@ const Header = ({isAuthenticated,user}) => {
       <Button
         onClick={onOpen}
         zIndex="overlay"
-        colorScheme={'yellow'}
+        colorScheme={'blue'}
         width="12"
         height={'12'}
         rounded="full"
@@ -53,8 +56,15 @@ const Header = ({isAuthenticated,user}) => {
 
       <Drawer placement="left" isOpen={isOpen} onClose={onClose}>
         <DrawerOverlay backdropFilter={'blur(3px)'} />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth={'1px'}>COURSEASY</DrawerHeader>
+        <DrawerContent bg={drawerBg}>
+          <DrawerHeader borderBottomWidth={'1px'}>
+            <img
+              src={tfpLogo}
+              alt="logo"
+              style={{ width: '90px', padding: '3px' }}
+              loading="lazy"
+            />
+          </DrawerHeader>
 
           <DrawerBody>
             <VStack spacing={'4'} alignItems="flex-start">
@@ -70,7 +80,6 @@ const Header = ({isAuthenticated,user}) => {
                 title="Request a Course"
               />
               <LinkButton onClose={onClose} url="/contact" title="Contact Us" />
-              <LinkButton onClose={onClose} url="/about" title="About" />
 
               <HStack
                 justifyContent={'space-evenly'}
@@ -83,12 +92,16 @@ const Header = ({isAuthenticated,user}) => {
                     <VStack>
                       <HStack>
                         <Link to="/profile" onClick={onClose}>
-                          <Button variant={'ghost'} colorScheme={'yellow'}>
+                          <Button variant={'ghost'} colorScheme={'blue'}>
                             Profile
                           </Button>
                         </Link>
 
-                        <Button variant={'ghost'} onClick={logoutHandler}>
+                        <Button
+                          colorScheme="red"
+                          variant={'ghost'}
+                          onClick={logoutHandler}
+                        >
                           <RiLogoutBoxLine />
                           Logout
                         </Button>
@@ -111,13 +124,13 @@ const Header = ({isAuthenticated,user}) => {
                 ) : (
                   <>
                     <Link to="/login" onClick={onClose}>
-                      <Button colorScheme={'yellow'} onClick={onClose}>
+                      <Button colorScheme={'blue'} onClick={onClose}>
                         Login
                       </Button>
                     </Link>
                     <p>OR</p>
                     <Link to="/register" onClick={onClose}>
-                      <Button colorScheme={'yellow'} onClick={onClose}>
+                      <Button colorScheme={'blue'} onClick={onClose}>
                         Signup
                       </Button>
                     </Link>

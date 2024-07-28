@@ -201,51 +201,51 @@ export const resetPassword = catchAsyncError(async (req, res, next) => {
 
 // add to playlist
 
-export const addToPlaylist = catchAsyncError(async (req, res, next) => {
-  const user = await User.findById(req.user._id);
+// export const addToPlaylist = catchAsyncError(async (req, res, next) => {
+//   const user = await User.findById(req.user._id);
 
-  const course = await Course.findById(req.body.id);
+//   const course = await Course.findById(req.body.id);
 
-  const itemExist = user.playlist.find((item) => {
-    if (item.course.toString() === course._id.toString()) return true;
-  });
+//   const itemExist = user.playlist.find((item) => {
+//     if (item.course.toString() === course._id.toString()) return true;
+//   });
 
-  if (itemExist) return next(new ErrorHandler("Item Already Exist", 409));
+//   if (itemExist) return next(new ErrorHandler("Item Already Exist", 409));
 
-  if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
+//   if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
 
-  user.playlist.push({
-    course: course._id,
-    poster: course.poster.url,
-  });
+//   user.playlist.push({
+//     course: course._id,
+//     poster: course.poster.url,
+//   });
 
-  await user.save();
+//   await user.save();
 
-  res.status(200).json({
-    success: true,
-    message: "Added to playlist successfully",
-  });
-});
+//   res.status(200).json({
+//     success: true,
+//     message: "Added to playlist successfully",
+//   });
+// });
 
 // remove from playlist
-export const removeFromPlaylist = catchAsyncError(async (req, res, next) => {
-  const user = await User.findById(req.user._id);
-  const course = await Course.findById(req.query.id);
-  if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
+// export const removeFromPlaylist = catchAsyncError(async (req, res, next) => {
+//   const user = await User.findById(req.user._id);
+//   const course = await Course.findById(req.query.id);
+//   if (!course) return next(new ErrorHandler("Invalid Course Id", 404));
 
-  const newPlaylist = user.playlist.filter((item) =>{ 
-    if (item.course.toString() !== course._id.toString()) return item;
-  });
+//   const newPlaylist = user.playlist.filter((item) =>{
+//     if (item.course.toString() !== course._id.toString()) return item;
+//   });
 
-  user.playlist = newPlaylist;
+//   user.playlist = newPlaylist;
 
-  await user.save();
+//   await user.save();
 
-  res.status(200).json({
-    success: true,
-    message: "Removed from playlist",
-  });
-});
+//   res.status(200).json({
+//     success: true,
+//     message: "Removed from playlist",
+//   });
+// });
 
 // delete user
 
@@ -267,7 +267,6 @@ export const deleteUser = catchAsyncError(async (req, res, next) => {
 
 export const getAllUsers = catchAsyncError(async (req, res, next) => {
   const users = await User.find();
-  console.log(users);
   res.status(200).json({
     success: true,
     users,
@@ -294,10 +293,7 @@ export const updateUserRole = catchAsyncError(async (req, res, next) => {
 User.watch().on("change", async () => {
   const stats = await Stats.find({}).sort({ createdAt: "desc" }).limit(1);
 
-  const subscription = await User.find({ "subscription.status": "active" });
-
   stats[0].users = await User.countDocuments();
-  stats[0].subscription = subscription.length;
   stats[0].createdAt = new Date(Date.now());
   await stats[0].save();
 });

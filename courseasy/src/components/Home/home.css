@@ -15,39 +15,76 @@
   }
 }
 
-.brandsBanner > svg {
-  color: white;
-  font-size: 2.5rem;
-  transition: color 0.5s;
-}
-
-.brandsBanner > svg:hover {
-  color: yellow;
-}
-
 .container2 {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 5rem;
 }
 
-.container2 video {
-  border: 1px solid rgba(0, 0, 0, 0.18);
-  width: 60%;
-  border-radius: 5px;
-  outline: none;
-  box-shadow: 0 0 10px;
+.container3 {
+  min-height: 100vh;
+  width: 100%;
+  padding: 5rem;
+  box-sizing: border-box;
 }
 
-@media screen and (max-width: 600px) {
-  .container2 video {
-    width: 100%;
-  }
+.container4 {
+  min-height: 100vh;
+  width: 100%;
+  padding: 5rem;
+}
+
+.container5 {
+  width: 100%;
+}
+
+.container6 {
+  min-height: 100vh;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .course {
   width: 250px;
   margin-bottom: 1rem;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 10rem;
+  margin-bottom: 20px;
+}
+
+.banner {
+  display: flex;
+  animation: swipe var(--speed) linear infinite backwards;
+}
+
+.wrapper {
+  position: absolute;
+  display: flex;
+}
+
+.bannerImg {
+  max-width: 250px;
+  height: 10rem;
+  padding: 0 15px;
+  object-fit: cover;
+  border-radius: 30%;
+}
+
+.bannerImg:last-of-type {
+  padding-left: 10;
+}
+
+@keyframes swipe {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-100%);
+  }
 }

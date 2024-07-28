@@ -9,22 +9,25 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {useDispatch} from "react-redux";
+import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions/user';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  const submitHandler = (e)=>{
-   e.preventDefault();
-   dispatch(login(email,password))
-  }
+  const submitHandler = e => {
+    e.preventDefault();
+    dispatch(login(email, password));
+  };
   return (
     <Container h={'95vh'}>
       <VStack h={'full'} justifyContent="center" spacing={'16'}>
-        <Heading children={'Welcome to Courseasy'} />
+        <Heading
+          fontSize={['1.6rem', '3xl']}
+          children={'Welcome to TFP Coding'}
+        />
         <form onSubmit={submitHandler} style={{ width: '100%' }}>
           <Box marginY={'4'}>
             <FormLabel htmlFor="email" children="Email Address" />
@@ -35,8 +38,8 @@ const dispatch = useDispatch();
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@gmail.com"
               type={'email'}
-              focusBorderColor="yellow.500"
-              autoComplete='off'
+              focusBorderColor="blue.300"
+              autoComplete="off"
             />
           </Box>
           <Box marginY={'4'}>
@@ -48,7 +51,7 @@ const dispatch = useDispatch();
               onChange={e => setPassword(e.target.value)}
               placeholder="*******"
               type={'password'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.300"
             />
           </Box>
           <Box marginY={'4'}>
@@ -58,7 +61,7 @@ const dispatch = useDispatch();
               </Button>
             </Link>
           </Box>
-          <Button my={'4'} colorScheme={'yellow'} type="submit">
+          <Button my={'4'} colorScheme={'blue'} type="submit">
             Login
           </Button>
           <Box my={'4'}>

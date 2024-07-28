@@ -22,16 +22,6 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      video: {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
-      },
     },
   ],
   poster: {

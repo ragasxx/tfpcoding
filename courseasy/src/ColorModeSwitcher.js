@@ -10,7 +10,7 @@ export const ColorModeSwitcher = props => {
   return (
     <IconButton
       zIndex={'overlay'}
-      size="md"
+      size="lg"
       fontSize="lg"
       aria-label={`Switch to ${text} mode`}
       variant="ghost"

@@ -10,9 +10,9 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import{useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { courseRequest } from '../../redux/actions/other';
-import {toast} from "react-hot-toast";
+import { toast } from 'react-hot-toast';
 
 const Request = () => {
   const [name, setName] = useState('');
@@ -20,28 +20,31 @@ const Request = () => {
   const [course, setCourse] = useState('');
 
   const dispatch = useDispatch();
-  const {loading,error,message} = useSelector(state=>state.other);
+  const { loading, error, message } = useSelector(state => state.other);
 
-  const submitHandler = (e)=>{
+  const submitHandler = e => {
     e.preventDefault();
-    dispatch(courseRequest(name,email,course));  
-}
+    dispatch(courseRequest(name, email, course));
+    setCourse('');
+    setName('');
+    setEmail('');
+  };
 
-useEffect(() => {
-  if(error){
-    toast.error(error);
-    dispatch({type:"clearError"});
-  }
-  if(message){
-    toast.success(message);
-    dispatch({type:"clearMessage"});
-  }
-}, [dispatch,message,error])
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+  }, [dispatch, message, error]);
 
   return (
     <Container h={'92vh'}>
       <VStack h={'full'} justifyContent="center" spacing={'16'}>
-        <Heading children="Request a Course" />
+        <Heading fontSize={['1.6rem', '3xl']} children="Request a Course" />
         <form onSubmit={submitHandler} style={{ width: '100%' }}>
           <Box marginY={'4'}>
             <FormLabel htmlFor="name" children="Name" />
@@ -52,7 +55,7 @@ useEffect(() => {
               onChange={e => setName(e.target.value)}
               placeholder="abc"
               type={'text'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.300"
               autoComplete="false"
             />
           </Box>
@@ -65,7 +68,7 @@ useEffect(() => {
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@gmail.com"
               type={'email'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.300"
               autoComplete="false"
             />
           </Box>
@@ -78,11 +81,11 @@ useEffect(() => {
               value={course}
               onChange={e => setCourse(e.target.value)}
               placeholder="Type the course u want..."
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.300"
               autoComplete="false"
             />
           </Box>
-          <Button isLoading={loading} my={'4'} colorScheme="yellow" type="submit">
+          <Button isLoading={loading} my={'4'} colorScheme="blue" type="submit">
             Send Mail
           </Button>
           <Box my={'4'}>

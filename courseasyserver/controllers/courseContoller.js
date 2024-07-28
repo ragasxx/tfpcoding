@@ -5,19 +5,16 @@ import getDataUri from "../utils/dataUri.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import cloudinary from "cloudinary";
 export const getAllCourses = catchAsyncError(async (req, res, next) => {
-  
   const keyword = req.query.keyword || "";
   const category = req.query.category || "";
 
   const courses = await Course.find({
-    title:{
-         $regex:keyword,
-        
-    }, 
-    category:{
-        $regex:category,
-       
-    }
+    title: {
+      $regex: keyword,
+    },
+    category: {
+      $regex: category,
+    },
   }).select("-lectures");
 
   res.status(200).json({
@@ -78,19 +75,9 @@ export const addLecture = catchAsyncError(async (req, res, next) => {
 
   // upload file from cloudinary
 
-  const file = req.file;
-  const fileUri = getDataUri(file);
-  const myCloud = await cloudinary.v2.uploader.upload(fileUri.content, {
-    resource_type: "video",
-  });
-
   course.lectures.push({
     title,
     description,
-    video: {
-      public_id: myCloud.public_id,
-      url: myCloud.url,
-    },
   });
 
   course.numOfVideos = course.lectures.length;
@@ -110,12 +97,12 @@ export const deleteCourse = catchAsyncError(async (req, res, next) => {
 
   await cloudinary.v2.uploader.destroy(course.poster.public_id);
 
-  for (let i = 0; i < course.lectures.length; i++) {
-    const singleLecture = course.lectures[i];
-    await cloudinary.v2.uploader.destroy(singleLecture.video.public_id, {
-      resource_type: "video",
-    });
-  }
+  // for (let i = 0; i < course.lectures.length; i++) {
+  //   const singleLecture = course.lectures[i];
+  //   await cloudinary.v2.uploader.destroy(singleLecture.video.public_id, {
+  //     resource_type: "video",
+  //   });
+  // }
   await course.remove();
 
   res.status(200).json({
@@ -135,9 +122,9 @@ export const deleteLecture = catchAsyncError(async (req, res, next) => {
     if (item._id.toString() === lectureId.toString()) return item;
   });
 
-  await cloudinary.v2.uploader.destroy(lecture.video.public_id, {
-    resource_type: "video",
-  });
+  // await cloudinary.v2.uploader.destroy(lecture.video.public_id, {
+  //   resource_type: "video",
+  // });
 
   course.lectures = course.lectures.filter((item) => {
     if (item._id.toString() !== lectureId.toString()) return item;
@@ -153,17 +140,17 @@ export const deleteLecture = catchAsyncError(async (req, res, next) => {
   });
 });
 
-Course.watch().on("change", async () => {
-  const stats = await Stats.find({}).sort({ createdAt: "desc" }).limit(1);
+// Course.watch().on("change", async () => {
+//   const stats = await Stats.find({}).sort({ createdAt: "desc" }).limit(1);
 
-  const courses = await Course.find({});
+//   const courses = await Course.find({});
 
-  let totalViews = 0;
+//   let totalViews = 0;
 
-  for (let i = 0; i < courses.length; i++) {
-    totalViews += courses[i].views;
-  }
-  stats[0].views = totalViews;
-  stats[0].createdAt = new Date(Date.now());
-  await stats[0].save();
-});
+//   for (let i = 0; i < courses.length; i++) {
+//     totalViews += courses[i].views;
+//   }
+//   stats[0].views = totalViews;
+//   stats[0].createdAt = new Date(Date.now());
+//   await stats[0].save();
+// });

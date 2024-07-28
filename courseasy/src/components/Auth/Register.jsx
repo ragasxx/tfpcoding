@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {useDispatch} from "react-redux";
+import { useDispatch } from 'react-redux';
 import { register } from '../../redux/actions/user';
 
 const fileUploadCss = {
@@ -19,8 +19,8 @@ const fileUploadCss = {
   width: '110%',
   border: 'none',
   height: '100%',
-  color: '#ECC94B',
-  backgroundColor: 'white',
+  color: 'white',
+  backgroundColor: 'lightBlue',
 };
 
 const fileUploadStyle = {
@@ -47,22 +47,25 @@ const Register = () => {
 
   const dispatch = useDispatch();
 
-  const submitHandler = (e)=>{
-     e.preventDefault();
-     const myForm = new FormData();
-     myForm.append("name",name);
-     myForm.append("email",email);
-     myForm.append("password",password);
-     myForm.append("file",image);
-     
-     dispatch(register(myForm));
- 
-  }
+  const submitHandler = e => {
+    e.preventDefault();
+    const myForm = new FormData();
+    myForm.append('name', name);
+    myForm.append('email', email);
+    myForm.append('password', password);
+    myForm.append('file', image);
+
+    dispatch(register(myForm));
+  };
 
   return (
-    <Container h={'100vh'}>
+    <Container minH={'100vh'}>
       <VStack h={'full'} justifyContent="center">
-        <Heading children={'Registration'} textTransform="uppercase" />
+        <Heading
+          fontSize={['1.6rem', '3xl']}
+          children={'Registration'}
+          textTransform="uppercase"
+        />
         <form onSubmit={submitHandler} style={{ width: '100%' }}>
           <Box my={'4'} display={'flex'} justifyContent="center">
             <Avatar src={imagePrev} size={'2xl'} />
@@ -77,8 +80,8 @@ const Register = () => {
               onChange={e => setName(e.target.value)}
               placeholder="abc"
               type={'text'}
-              focusBorderColor="yellow.500"
-              autoComplete='off'
+              focusBorderColor="blue.300"
+              autoComplete="off"
             />
           </Box>
           <Box marginY={'4'}>
@@ -90,8 +93,8 @@ const Register = () => {
               onChange={e => setEmail(e.target.value)}
               placeholder="abc@gmail.com"
               type={'email'}
-              focusBorderColor="yellow.500"
-              autoComplete='off'
+              focusBorderColor="blue.300"
+              autoComplete="off"
             />
           </Box>
           <Box marginY={'4'}>
@@ -103,7 +106,7 @@ const Register = () => {
               onChange={e => setPassword(e.target.value)}
               placeholder="*******"
               type={'password'}
-              focusBorderColor="yellow.500"
+              focusBorderColor="blue.300"
             />
           </Box>
           <Box marginY={'4'}>
@@ -113,13 +116,12 @@ const Register = () => {
               required
               id="chooseAvatar"
               type={'file'}
-              focusBorderColor="yellow.500"
               css={fileUploadStyle}
               onChange={changeImageHandler}
             />
           </Box>
 
-          <Button my={'4'} colorScheme={'yellow'} type="submit">
+          <Button my={'4'} colorScheme={'blue'} type="submit">
             Sign Up
           </Button>
           <Box my={'4'}>
