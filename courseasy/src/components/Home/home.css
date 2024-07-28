@@ -1,0 +1,90 @@
+.container {
+  height: 100vh;
+  padding: 5rem;
+  box-sizing: border-box;
+}
+
+.vector-graphics {
+  filter: drop-shadow(0 40px 10px rgba(0, 0, 0, 0.3));
+  animation: vectorAnimation 1s infinite ease-in-out alternate;
+}
+
+@keyframes vectorAnimation {
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.container2 {
+  min-height: 100vh;
+  width: 100%;
+  padding: 5rem;
+}
+
+.container3 {
+  min-height: 100vh;
+  width: 100%;
+  padding: 5rem;
+  box-sizing: border-box;
+}
+
+.container4 {
+  min-height: 100vh;
+  width: 100%;
+  padding: 5rem;
+}
+
+.container5 {
+  width: 100%;
+}
+
+.container6 {
+  min-height: 100vh;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.course {
+  width: 250px;
+  margin-bottom: 1rem;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 10rem;
+  margin-bottom: 20px;
+}
+
+.banner {
+  display: flex;
+  animation: swipe var(--speed) linear infinite backwards;
+}
+
+.wrapper {
+  position: absolute;
+  display: flex;
+}
+
+.bannerImg {
+  max-width: 250px;
+  height: 10rem;
+  padding: 0 15px;
+  object-fit: cover;
+  border-radius: 30%;
+}
+
+.bannerImg:last-of-type {
+  padding-left: 10;
+}
+
+@keyframes swipe {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-100%);
+  }
+}
