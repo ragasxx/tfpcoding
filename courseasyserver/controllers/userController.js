@@ -8,6 +8,7 @@ import { Course } from "../models/Course.js";
 import cloudinary from "cloudinary";
 import getDataUri from "../utils/dataUri.js";
 import { Stats } from "../models/Stats.js";
+import path from "path";
 
 export const register = catchAsyncError(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -56,18 +57,11 @@ export const login = catchAsyncError(async (req, res, next) => {
 });
 
 export const logout = catchAsyncError(async (req, res, next) => {
-  res
-    .status(200)
-    .cookie("token", null, {
-      expires: new Date(0),
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    })
-    .json({
-      success: true,
-      message: "Logged Out Successfully",
-    });
+  console.log("inside logout");
+  res.status(200).clearCookie("token", { path: "/" }).json({
+    success: true,
+    message: "Logged Out Successfully",
+  });
 });
 
 export const getMyProfile = catchAsyncError(async (req, res, next) => {
