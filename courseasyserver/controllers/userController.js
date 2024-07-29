@@ -58,7 +58,7 @@ export const login = catchAsyncError(async (req, res, next) => {
 
 export const logout = catchAsyncError(async (req, res, next) => {
   console.log("inside logout");
-  res.status(200).clearCookie("token", { path: "/" }).json({
+  res.status(200).clearCookie("jwtoken", { path: "/" }).json({
     success: true,
     message: "Logged Out Successfully",
   });
