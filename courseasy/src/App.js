@@ -147,14 +147,7 @@ function App() {
               }
             />
 
-            <Route
-              path="/course/:id"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <LecturesPage user={user} />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/course/:id" element={<LecturesPage user={user} />} />
 
             <Route path="*" element={<NotFound />} />
 

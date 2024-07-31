@@ -23,7 +23,7 @@ router
 //add lectures,delete course,get course details
 router
   .route("/course/:id")
-  .get(isAuthenticated, getCourseLectures)
+  .get(getCourseLectures)
   .post(isAuthenticated, isAdminAuthenticated, singleUpload, addLecture)
   .delete(isAuthenticated, isAdminAuthenticated, deleteCourse);
 
