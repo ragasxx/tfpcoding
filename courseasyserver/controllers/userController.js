@@ -58,10 +58,13 @@ export const login = catchAsyncError(async (req, res, next) => {
 
 export const logout = catchAsyncError(async (req, res, next) => {
   console.log("inside logout");
-  res.status(200).clearCookie("jwtoken", { path: "/" }).json({
-    success: true,  
-    message: "Logged Out Successfully",
-  });
+  res
+    .status(200)
+    .clearCookie("jwtoken", { httpOnly: true, secure: true, sameSite: "none" })
+    .json({
+      success: true,
+      message: "Logged Out Successfully",
+    });
 });
 
 export const getMyProfile = catchAsyncError(async (req, res, next) => {
