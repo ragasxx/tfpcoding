@@ -64,7 +64,7 @@ export const logout = catchAsyncError(async (req, res, next) => {
       httpOnly: true,
       secure: !isDevModeOn,
       sameSite: isDevModeOn ? "strict" : "none",
-      domain: "vercel.app", // Use top-level domain to include both subdomains
+      domain: ".vercel.app", // Use top-level domain to include both subdomains
       path: "/",
     })
     .json({
