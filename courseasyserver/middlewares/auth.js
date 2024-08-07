@@ -15,6 +15,18 @@ export const isAuthenticated = catchAsyncError(async (req, res, next) => {
   next();
 });
 
+// export const isAuthenticated = catchAsyncError(async (req, res, next) => {
+//   if (req.headers && req.headers.authorization) {
+//     const token = req.headers.authorization.split(" ")[1];
+//     console.log("token", token);
+//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+//     req.user = await User.findById(decoded._id);
+//     next();
+//   } else {
+//     return next(new ErrorHandler("Please Login First", 401));
+//   }
+// });
+
 export const isAdminAuthenticated = (req, res, next) => {
   if (req.user.role !== "admin")
     return next(

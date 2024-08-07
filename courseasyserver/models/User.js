@@ -3,6 +3,7 @@ import validator from "validator";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import { type } from "os";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -40,6 +41,11 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  tokens: [
+    {
+      type: Object,
+    },
+  ],
   resetPasswordToken: String,
   resetPasswordExpire: String,
 });
@@ -52,7 +58,7 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.getJWTToken = function () {
   return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: "2d",
+    expiresIn: "1d",
   });
 };
 
