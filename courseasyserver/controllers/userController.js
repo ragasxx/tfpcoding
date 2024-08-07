@@ -55,10 +55,16 @@ export const login = catchAsyncError(async (req, res, next) => {
 });
 
 export const logout = catchAsyncError(async (req, res, next) => {
+  const isDevModeOn = process.env.NODE_ENV !== "production";
+
   console.log("inside logout");
   res
     .status(200)
-    .clearCookie("jwtoken", { httpOnly: true, secure: true, sameSite: "none" })
+    .clearCookie("jwtoken", {
+      httpOnly: true,
+      secure: !isDevModeOn,
+      sameSite: isDevModeOn ? "strict" : "none",
+    })
     .json({
       success: true,
       message: "Logged Out Successfully",
