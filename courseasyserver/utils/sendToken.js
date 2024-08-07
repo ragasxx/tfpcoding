@@ -26,6 +26,8 @@ export const sendToken = async (res, user, message, statusCode = 200) => {
     httpOnly: true,
     secure: !isDevModeOn,
     sameSite: isDevModeOn ? "strict" : "none",
+    domain: "vercel.app",
+    path: "/",
   };
 
   res.status(statusCode).cookie("jwtoken", token, options).json({
