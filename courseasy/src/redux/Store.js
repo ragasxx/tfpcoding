@@ -8,8 +8,8 @@ import { courseReducer } from './reducers/courseReducer';
 import { adminReducer } from './reducers/adminReducer';
 import { otherReducer } from './reducers/otherReducer';
 
-// export const server = 'https://tfpcoding.vercel.app/api/v1';
-export const server = 'http://localhost:5000/api/v1';
+export const server = 'https://tfpcoding.vercel.app/api/v1';
+// export const server = 'http://localhost:5000/api/v1';
 
 const store = configureStore({
   reducer: {
