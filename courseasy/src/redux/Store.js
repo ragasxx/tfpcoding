@@ -10,6 +10,7 @@ import { otherReducer } from './reducers/otherReducer';
 
 export const server = 'https://tfpcoding.vercel.app/api/v1';
 // export const server = 'http://localhost:5000/api/v1';
+// export const server = 'https://4af6-103-95-83-2.ngrok-free.app/api/v1';
 
 const store = configureStore({
   reducer: {

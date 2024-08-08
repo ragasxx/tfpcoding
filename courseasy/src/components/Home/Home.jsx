@@ -166,7 +166,7 @@ const Home = () => {
 
       <div className="container2">
         <Heading children="Our Courses" textAlign={['center', 'start']} m="8" />
-        {courses.length > 0 ? (
+        {courses?.length > 0 ? (
           <Stack
             direction={['column', 'row']}
             height="100%"
@@ -174,7 +174,7 @@ const Home = () => {
             alignItems="center"
             spacing={['16', '56']}
           >
-            {courses.length > 0 &&
+            {courses?.length > 0 &&
               courses.map(item => (
                 <CourseCard
                   key={item._id}
