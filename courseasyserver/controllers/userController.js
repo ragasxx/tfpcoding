@@ -61,9 +61,9 @@ export const logout = catchAsyncError(async (req, res, next) => {
   res
     .status(200)
     .clearCookie("jwtoken", {
-      httpOnly: true,
-      secure: !isDevModeOn,
-      sameSite: isDevModeOn ? "strict" : "none",
+      // httpOnly: true,
+      // secure: !isDevModeOn,
+      // sameSite: isDevModeOn ? "strict" : "none",
     })
     .json({
       success: true,
