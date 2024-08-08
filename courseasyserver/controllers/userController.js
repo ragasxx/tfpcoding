@@ -58,14 +58,11 @@ export const logout = catchAsyncError(async (req, res, next) => {
   console.log("inside logout");
   res
     .status(200)
-    .clearCookie("jwtoken", {
-      // httpOnly: true,
-      // secure: !isDevModeOn,
-      // sameSite: isDevModeOn ? "strict" : "none",
+    .cookie("jwtoken", null, {
+      expires: new Date(Date.now()),
       httpOnly: true,
       secure: true, // Same as when setting the cookie
-      sameSite: "None", // Same as when setting the cookie
-      path: "/", // Ensure path matches the setting path
+      sameSite: "none", // Same as when setting the cookie
     })
     .json({
       success: true,
