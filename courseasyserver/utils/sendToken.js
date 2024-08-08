@@ -22,10 +22,14 @@ export const sendToken = async (res, user, message, statusCode = 200) => {
 
   const options = {
     // maxAge: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-    expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+    // expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
     // httpOnly: true,
     // secure: !isDevModeOn,
     // sameSite: isDevModeOn ? "strict" : "none",
+    httpOnly: true,
+    secure: true, // Same as when setting the cookie
+    sameSite: "None", // Same as when setting the cookie
+    path: "/",
   };
 
   res.status(statusCode).cookie("jwtoken", token, options).json({
